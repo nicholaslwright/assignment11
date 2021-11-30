@@ -28,3 +28,5 @@ for triple in nn.test_with_expected(xor_data):
  print(triple)
 
 # Task 3
+
+import pandas as pd
