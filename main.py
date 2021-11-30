@@ -30,3 +30,13 @@ for triple in nn.test_with_expected(xor_data):
 # Task 3
 
 import pandas as pd
+
+df = pd.read_csv('wine.data')
+
+normalized_df = (df-df.min())/(df.max()-df.min())
+
+print(normalized_df)
+
+for row in normalized_df.iterrows():
+ print(row)
+
