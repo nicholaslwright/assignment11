@@ -37,6 +37,25 @@ normalized_df = (df-df.min())/(df.max()-df.min())
 
 print(normalized_df)
 
+new_list = []
+
 for row in normalized_df.iterrows():
- print(row)
+ attributes = list(row[1:])
+ answer = [row[0]]
+ new_row = (attributes, answer)
+ new_list.append(new_row)
+
+print(new_list)
+
+# Put new list inside the neural net
+nn = NeuralNet(13, 5, 1)
+nn.train(new_list)
+
+#print(nn.evaluate([0.0, 1.0]))
+
+for triple in nn.test_with_expected(new_list):
+ print(triple)
+
+
+
 
