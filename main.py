@@ -32,20 +32,29 @@ for triple in nn.test_with_expected(xor_data):
 import pandas as pd
 
 df = pd.read_csv('wine.data')
-
+df.astype(float)
 normalized_df = (df-df.min())/(df.max()-df.min())
 
 print(normalized_df)
-
 new_list = []
 
-for row in normalized_df.iterrows():
- attributes = list(row[1:])
- answer = [row[0]]
- new_row = (attributes, answer)
- new_list.append(new_row)
+row_counter = 0
 
-print(new_list)
+for row in normalized_df.iterrows():
+ attribute_counter = 0
+ if row_counter>0:
+  attributes = []
+  for val in row[1]:
+   if attribute_counter>0:
+    attribute = val
+    attributes.append(attribute)
+   attribute_counter += 1
+
+  answer = [row[0]]
+  new_row = (attributes, answer)
+  new_list.append(new_row)
+ row_counter += 1
+
 
 # Put new list inside the neural net
 nn = NeuralNet(13, 5, 1)
@@ -56,6 +65,6 @@ nn.train(new_list)
 for triple in nn.test_with_expected(new_list):
  print(triple)
 
-
+print(new_list[0][0])
 
 
