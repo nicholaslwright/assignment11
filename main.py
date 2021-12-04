@@ -48,23 +48,22 @@ for row in normalized_df.iterrows():
    if attribute_counter>0:
     attribute = val
     attributes.append(attribute)
+   else:
+    answer = [val]
    attribute_counter += 1
 
-  answer = [row[0]]
+  #answer = [row[0]]
   new_row = (attributes, answer)
   new_list.append(new_row)
  row_counter += 1
 
 
 # Put new list inside the neural net
-nn = NeuralNet(13, 5, 1)
+nn = NeuralNet(13, 7, 1)
 nn.train(new_list)
 
-#print(nn.evaluate([0.0, 1.0]))
+print(nn.evaluate(new_list[0][0]))
 
-for triple in nn.test_with_expected(new_list):
- print(triple)
-
-print(new_list[0][0])
-
+for i in nn.test_with_expected(new_list):
+ print(f"desired: {i[1]}, actual: {i[2]}")
 

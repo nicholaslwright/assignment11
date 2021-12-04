@@ -160,7 +160,7 @@ class NeuralNet:
     def train(
         self,
         data: List[Tuple[I, O]],
-        learning_rate: float = 0.5,
+        learning_rate: float = 0.7,
         momentum_factor: float = 0.1,
         iters: int = 1000,
         print_interval: int = 100,
